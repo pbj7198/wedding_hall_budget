@@ -189,7 +189,6 @@
         const description = decodeEntities(descriptionRaw);
         const thumb = extractFirstImage(description);
         const thumbProxied = thumb ? `${workerBase}/img?url=${encodeURIComponent(thumb)}` : null;
-
         const textDesc = stripText(description);
 
       
@@ -199,7 +198,7 @@
           title,
           link,
           date: formatDate(pubDate),
-          thumbnail: thumb,
+          thumbnail: thumbProxied || thumb, // 프록시 우선
           category,
           desc: textDesc
         };
