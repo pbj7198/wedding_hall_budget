@@ -72,3 +72,4 @@ git push -u origin main
   - `FEED_ENDPOINT`가 정확한지 확인
   - Worker가 `/feed` 경로를 반환하는지 확인
   - Worker URL을 브라우저에서 직접 열었을 때 `{"xml":"..."} ` 형태로 오는지 확인
+# wedding_hall_budget
