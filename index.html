@@ -176,7 +176,8 @@
       const res = await fetch(FEED_ENDPOINT, { cache: "no-store" });
       if (!res.ok) throw new Error("feed fetch failed");
       const { xml } = await res.json();
-
+      
+      const workerBase = new URL(FEED_ENDPOINT).origin;
       const xmlDoc = new DOMParser().parseFromString(xml, "text/xml");
       const items = [...xmlDoc.querySelectorAll("item")].slice(0, 9);
 
@@ -187,6 +188,8 @@
         const descriptionRaw = item.querySelector("description")?.textContent || "";
         const description = decodeEntities(descriptionRaw);
         const thumb = extractFirstImage(description);
+        const thumbProxied = thumb ? `${workerBase}/img?url=${encodeURIComponent(thumb)}` : null;
+
         const textDesc = stripText(description);
 
       
