@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>쭈령이 커플 | 웨딩 블로그</title>
+  <title>서울 웨딩홀 견적 공유 | 웨딩 블로그</title>
   <meta name="description" content="쭈령이 커플 웨딩 블로그 최신 글 모아보기" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,12 +111,30 @@
   }
 
   // RSS description 안에서 첫 이미지 뽑기(없으면 null)
+  function normalizeUrl(src) {
+    if (!src) return null;
+    // //cdn... 형태면 https 붙이기
+    if (src.startsWith("//")) src = "https:" + src;
+    // http면 https로 강제 (mixed content 방지)
+    src = src.replace(/^http:\/\//i, "https://");
+    return src;
+  }
+
   function extractFirstImage(html) {
     if (!html) return null;
-    const doc = new DOMParser().parseFromString(html, "text/html");
+
+    // 1) HTML 엔티티(&lt;img ...&gt;) 디코딩
+    const decoded = decodeEntities(html);
+
+    // 2) HTML 파싱해서 img 찾기
+    const doc = new DOMParser().parseFromString(decoded, "text/html");
     const img = doc.querySelector("img");
-    return img ? img.getAttribute("src") : null;
+
+    // 3) data-src 같은 형태도 대응
+    const src = img?.getAttribute("src") || img?.getAttribute("data-src");
+    return normalizeUrl(src);
   }
+
 
   function stripText(html) {
     if (!html) return "";
@@ -145,6 +163,13 @@
       </a>
     `;
   }
+  
+  function decodeEntities(str) {
+    if (!str) return "";
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+}
 
   async function loadFeed() {
     try {
@@ -159,14 +184,14 @@
         const title = item.querySelector("title")?.textContent?.trim() || "Untitled";
         const link = item.querySelector("link")?.textContent?.trim() || BLOG_HOME;
         const pubDate = item.querySelector("pubDate")?.textContent?.trim();
-        const description = item.querySelector("description")?.textContent || "";
-
-        // 네이버 RSS는 썸네일 태그가 없을 수 있어 description에서 첫 img 추출
+        const descriptionRaw = item.querySelector("description")?.textContent || "";
+        const description = decodeEntities(descriptionRaw);
         const thumb = extractFirstImage(description);
-
-        const category = item.querySelector("category")?.textContent?.trim();
         const textDesc = stripText(description);
 
+      
+        const category = item.querySelector("category")?.textContent?.trim();
+       
         return {
           title,
           link,
