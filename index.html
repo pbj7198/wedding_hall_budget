@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>쭈령이 커플 | 웨딩 블로그</title>
+  <meta name="description" content="쭈령이 커플 웨딩 블로그 최신 글 모아보기" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#fbfaf8; --paper:#fff; --ink:#111; --muted:#6b6b6b;
+      --line:rgba(17,17,17,.12); --shadow:0 10px 30px rgba(0,0,0,.06);
+      --radius:18px; --max:1120px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:32px 20px 80px}
+    .top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:20px 0 28px;border-bottom:1px solid var(--line)}
+    .brand{display:flex;flex-direction:column;gap:10px}
+    .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+    h1{margin:0;font-family:"Playfair Display",serif;font-weight:600;font-size:46px;line-height:1.05;letter-spacing:-.02em}
+    .sub{margin:0;max-width:56ch;color:var(--muted);font-size:15px;line-height:1.7}
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;font-weight:600;font-size:13px;transition:.12s;cursor:pointer}
+    .btn:hover{transform:translateY(-1px);background:rgba(17,17,17,.04)}
+    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .btn.primary:hover{background:#000}
+    .section{padding:28px 0 0}
+    .sectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 14px}
+    .sectionHead h2{margin:0;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+    .sectionHead .mini{font-size:13px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:14px}
+    .card{grid-column:span 4;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.14s;display:flex;flex-direction:column;min-height:420px}
+    .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(17,17,17,.22)}
+    .thumb{position:relative;aspect-ratio:4/3;background:#eee;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;transform:scale(1.01);transition:.25s;display:block}
+    .card:hover .thumb img{transform:scale(1.05)}
+    .badge{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.92);border:1px solid var(--line);padding:7px 10px;border-radius:999px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#333;backdrop-filter:blur(6px)}
+    .content{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .title{margin:0;font-family:"Playfair Display",serif;font-weight:600;font-size:22px;line-height:1.15}
+    .desc{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65;flex:1}
+    .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+    .arrow{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:600}
+    .arrow span{width:26px;height:26px;border:1px solid var(--line);border-radius:999px;display:grid;place-items:center;transition:.12s}
+    .card:hover .arrow span{transform:translateX(2px);background:rgba(17,17,17,.04)}
+    .state{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted);background:rgba(255,255,255,.5)}
+    footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    footer a{border-bottom:1px solid rgba(107,107,107,.35)}
+    footer a:hover{border-bottom-color:rgba(107,107,107,.9)}
+    @media (max-width:980px){h1{font-size:40px}.card{grid-column:span 6}}
+    @media (max-width:620px){.top{flex-direction:column;align-items:flex-start}.ctaRow{justify-content:flex-start}h1{font-size:34px}.card{grid-column:span 12}}
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="kicker">Wedding blog</div>
+        <h1>쭈령이 커플</h1>
+        <p class="sub">
+          웨딩홀 투어부터 스드메, 본식 준비, 신혼여행까지. 최신 글을 자동으로 모아 보여주는 페이지예요.
+        </p>
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn" href="#posts">최신 글 보기</a>
+        <a class="btn primary" id="goBlog" href="#" target="_blank" rel="noopener">블로그 홈으로</a>
+      </div>
+    </header>
+
+    <section class="section" id="posts">
+      <div class="sectionHead">
+        <h2>Latest posts</h2>
+        <div class="mini">자동 업데이트 · 썸네일 클릭 → 해당 글로 이동</div>
+      </div>
+
+      <div id="state" class="state">불러오는 중…</div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> 쭈령이 커플</div>
+      <div><a id="blogLink" href="#" target="_blank" rel="noopener">블로그 바로가기</a></div>
+    </footer>
+  </main>
+
+<script>
+  // ✅ 내 블로그 주소
+  const BLOG_HOME = "https://blog.naver.com/dic-wannabe";
+
+  // ✅ Cloudflare Worker 같은 프록시의 /feed 엔드포인트로 바꿔주세요 (README 참고)
+  const FEED_ENDPOINT = "https://YOUR-WORKER.workers.dev/feed";
+
+  const grid = document.getElementById("grid");
+  const state = document.getElementById("state");
+  document.getElementById("y").textContent = new Date().getFullYear();
+  document.getElementById("blogLink").href = BLOG_HOME;
+  document.getElementById("goBlog").href = BLOG_HOME;
+
+  function formatDate(pubDate) {
+    if (!pubDate) return "";
+    const d = new Date(pubDate);
+    if (Number.isNaN(d.getTime())) return "";
+    return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+  }
+
+  // RSS description 안에서 첫 이미지 뽑기(없으면 null)
+  function extractFirstImage(html) {
+    if (!html) return null;
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const img = doc.querySelector("img");
+    return img ? img.getAttribute("src") : null;
+  }
+
+  function stripText(html) {
+    if (!html) return "";
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return (doc.body.textContent || "").replace(/\s+/g, " ").trim();
+  }
+
+  function cardHTML({title, link, desc, date, thumbnail, category}) {
+    const safeThumb = thumbnail || "https://images.unsplash.com/photo-1523438097201-512ae7d59cba?auto=format&fit=crop&w=1600&q=80";
+    const safeCat = category || "Naver Blog";
+    const safeDesc = (desc || "").slice(0, 120) + ((desc||"").length > 120 ? "…" : "");
+    return `
+      <a class="card" href="${link}" target="_blank" rel="noopener" aria-label="${title}">
+        <div class="thumb">
+          <img src="${safeThumb}" alt="${title}">
+          <div class="badge">${safeCat}</div>
+        </div>
+        <div class="content">
+          <h3 class="title">${title}</h3>
+          <p class="desc">${safeDesc}</p>
+          <div class="meta">
+            <div>${date}</div>
+            <div class="arrow">보러가기 <span>→</span></div>
+          </div>
+        </div>
+      </a>
+    `;
+  }
+
+  async function loadFeed() {
+    try {
+      const res = await fetch(FEED_ENDPOINT, { cache: "no-store" });
+      if (!res.ok) throw new Error("feed fetch failed");
+      const { xml } = await res.json();
+
+      const xmlDoc = new DOMParser().parseFromString(xml, "text/xml");
+      const items = [...xmlDoc.querySelectorAll("item")].slice(0, 9);
+
+      const posts = items.map(item => {
+        const title = item.querySelector("title")?.textContent?.trim() || "Untitled";
+        const link = item.querySelector("link")?.textContent?.trim() || BLOG_HOME;
+        const pubDate = item.querySelector("pubDate")?.textContent?.trim();
+        const description = item.querySelector("description")?.textContent || "";
+
+        // 네이버 RSS는 썸네일 태그가 없을 수 있어 description에서 첫 img 추출
+        const thumb = extractFirstImage(description);
+
+        const category = item.querySelector("category")?.textContent?.trim();
+        const textDesc = stripText(description);
+
+        return {
+          title,
+          link,
+          date: formatDate(pubDate),
+          thumbnail: thumb,
+          category,
+          desc: textDesc
+        };
+      });
+
+      state.remove();
+      grid.innerHTML = posts.map(cardHTML).join("");
+    } catch (e) {
+      state.textContent = "최신 글을 불러오지 못했어요. (FEED_ENDPOINT/프록시 배포 상태를 확인해 주세요)";
+      console.error(e);
+    }
+  }
+
+  loadFeed();
+</script>
+</body>
+</html>
