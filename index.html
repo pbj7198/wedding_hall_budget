@@ -8,85 +8,271 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#fbfaf8; --paper:#fff; --ink:#111; --muted:#6b6b6b;
-      --line:rgba(17,17,17,.12); --shadow:0 10px 30px rgba(0,0,0,.06);
-      --radius:18px; --max:1120px;
+      --bg:#f8fafc;
+      --card-bg:#ffffff;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --shadow:0 8px 24px rgba(15, 23, 42, .06);
+      --blue:#2563eb;
+      --hover:#f1f5f9;
+      --radius:14px;
+      --max:1240px;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:15px;line-height:1.55}
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:32px 20px 80px}
-    .top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:20px 0 28px;border-bottom:1px solid var(--line)}
-    .brand{display:flex;flex-direction:column;gap:10px}
-    .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-    h1{margin:0;font-family:"Playfair Display",serif;font-weight:600;font-size:46px;line-height:1.05;letter-spacing:-.02em}
-    .sub{margin:0;max-width:56ch;color:var(--muted);font-size:15px;line-height:1.7}
-    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;font-weight:600;font-size:13px;transition:.12s;cursor:pointer}
-    .btn:hover{transform:translateY(-1px);background:rgba(17,17,17,.04)}
-    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-    .btn.primary:hover{background:#000}
-    .section{padding:28px 0 0}
-    .sectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 14px}
-    .sectionHead h2{margin:0;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
-    .sectionHead .mini{font-size:13px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:14px}
-    .card{grid-column:span 4;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.14s;display:flex;flex-direction:column;min-height:420px}
-    .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(17,17,17,.22)}
-    .thumb{position:relative;aspect-ratio:4/3;background:#eee;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit:cover;transform:scale(1.01);transition:.25s;display:block}
-    .card:hover .thumb img{transform:scale(1.05)}
-    .badge{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.92);border:1px solid var(--line);padding:7px 10px;border-radius:999px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#333;backdrop-filter:blur(6px)}
-    .content{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
-    .title{margin:0;font-family:"Playfair Display",serif;font-weight:600;font-size:22px;line-height:1.15}
-    .desc{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65;flex:1}
-    .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
-    .arrow{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:600}
-    .arrow span{width:26px;height:26px;border:1px solid var(--line);border-radius:999px;display:grid;place-items:center;transition:.12s}
-    .card:hover .arrow span{transform:translateX(2px);background:rgba(17,17,17,.04)}
-    .state{padding:16px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted);background:rgba(255,255,255,.5)}
-    footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    footer a{border-bottom:1px solid rgba(107,107,107,.35)}
-    footer a:hover{border-bottom-color:rgba(107,107,107,.9)}
-    @media (max-width:980px){h1{font-size:40px}.card{grid-column:span 6}}
-    @media (max-width:620px){.top{flex-direction:column;align-items:flex-start}.ctaRow{justify-content:flex-start}h1{font-size:34px}.card{grid-column:span 12}}
+
+    /* Navigation */
+    nav{position:sticky;top:0;background:rgba(248,250,252,.85);border-bottom:1px solid var(--line);z-index:100;padding:0 20px;backdrop-filter:blur(10px)}
+    .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:24px;height:60px}
+    .logo{font-weight:700;font-size:19px;color:var(--ink)}
+    .nav-links{display:flex;gap:6px;align-items:center;flex:1}
+    .nav-links a{color:var(--muted);font-size:14px;font-weight:500;padding:8px 14px;border-radius:6px;transition:.2s}
+    .nav-links a:hover{color:var(--ink);background:var(--hover)}
+
+    .nav-search{display:flex;justify-content:flex-end}
+    .search{
+      width:260px; max-width:40vw;
+      padding:9px 12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:var(--card-bg);
+      color:var(--ink);
+      outline:none;
+      font-size:14px;
+    }
+    .search:focus{border-color:rgba(37,99,235,.45); box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+
+    .nav-right{display:flex;gap:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;border:1px solid var(--line);border-radius:10px;font-weight:600;cursor:pointer;transition:.15s;background:var(--card-bg);font-size:14px}
+    .btn.primary{background:var(--blue);border-color:var(--blue);color:white}
+    .btn.ghost{background:transparent}
+    .btn.block{width:100%}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* Container */
+    .wrap{max-width:var(--max);margin:0 auto;padding:40px 24px 80px}
+
+    /* Header */
+    .top{padding:0 0 40px;text-align:center}
+    .top h1{margin:0 0 12px;font-size:42px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+    .top .sub{margin:0 auto;color:var(--muted);font-size:17px;max-width:640px;line-height:1.65}
+
+    /* 2-column layout */
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 340px;
+      gap:28px;
+      align-items:start;
+    }
+    .mainCol{min-width:0}
+    .sidebar{position:sticky; top:86px; display:flex; flex-direction:column; gap:14px}
+
+    .widget{
+      background:var(--card-bg);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:14px 14px;
+      box-shadow:var(--shadow);
+    }
+    .widgetTitle{font-weight:700; font-size:14px; margin-bottom:8px}
+    .widgetText{color:var(--muted); font-size:13px; margin:0 0 12px}
+
+    /* Section */
+    .section{padding:0}
+    .sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 20px}
+    .sectionHead > div h2{margin:0;font-size:22px;font-weight:700;color:var(--ink)}
+    .sectionHead > div .mini{font-size:13px;color:var(--muted);margin-top:4px}
+
+    .tabs{display:flex; gap:6px; background:var(--hover); padding:6px; border-radius:12px; border:1px solid var(--line)}
+    .tab{
+      border:0; background:transparent; padding:8px 10px; border-radius:10px;
+      font-weight:700; font-size:13px; color:var(--muted); cursor:pointer; transition:.15s;
+    }
+    .tab.is-active{background:var(--card-bg); color:var(--ink); border:1px solid var(--line)}
+
+    .pills{display:flex; gap:6px; flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background:var(--card-bg);
+      color:var(--muted);
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.15s;
+    }
+    .pill.is-active{color:var(--ink); border-color:rgba(37,99,235,.35); box-shadow:0 0 0 4px rgba(37,99,235,.10)}
+
+    /* Feed (List style) */
+    .feed{display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--card-bg)}
+
+    .card{
+      display:flex; gap:14px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:transparent;
+      transition:.15s;
+    }
+    .card:last-child{border-bottom:none}
+    .card:hover{background:var(--hover)}
+
+    .thumb{
+      width:92px; height:64px; flex:0 0 auto;
+      border-radius:12px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      background:var(--hover);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+
+    .card-content{min-width:0; flex:1}
+    .metaRow{display:flex; gap:8px; align-items:center; color:var(--muted); font-size:12px; font-weight:600; margin-bottom:6px}
+    .badge{display:inline-flex; padding:4px 8px; border-radius:999px; border:1px solid var(--line); background:var(--card-bg); font-size:11px; font-weight:800; color:var(--muted)}
+    .time{font-weight:700}
+
+    .title{margin:6px 0 6px; font-size:16px; line-height:1.35; font-weight:700; color:var(--ink)}
+    .title:hover{color:var(--blue)}
+    .desc{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .sideList{display:flex; flex-direction:column; gap:10px}
+    .sideItem{display:flex; flex-direction:column; gap:4px; padding:8px 10px; border-radius:12px; border:1px solid var(--line); transition:.15s}
+    .sideItem:hover{background:var(--hover)}
+    .sideTitle{font-weight:800; font-size:13px; line-height:1.35}
+    .sideMeta{color:var(--muted); font-size:12px; font-weight:700}
+
+    .state{
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      color:var(--muted);
+      background:var(--card-bg);
+      text-align:center;
+      box-shadow:var(--shadow);
+    }
+
+    footer{
+      margin-top:80px;
+      padding-top:28px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    footer a{color:var(--blue)}
+    footer a:hover{text-decoration:underline}
+
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:static}
+      .nav-search{display:none}
+      .top h1{font-size:36px}
+    }
+
+    @media (max-width:640px){
+      .nav-links{display:none}
+      .logo{flex:1}
+      .top h1{font-size:32px}
+      .wrap{padding:32px 16px 60px}
+      .card{padding:12px 14px}
+    }
   </style>
 </head>
 
 <body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">쭐령이 커플</a>
+      <div class="nav-links">
+        <a href="#posts" data-cat="all">최신 글</a>
+        <a href="#wedding" data-cat="웨딩홀">웨딩홀</a>
+        <a href="#dress" data-cat="스드메">스드메</a>
+        <a href="#travel" data-cat="신혼여행">신혼여행</a>
+      </div>
+      <div class="nav-search">
+        <input id="q" class="search" type="search" placeholder="글 검색…" autocomplete="off" />
+      </div>
+      <div class="nav-right">
+        <a class="btn primary" id="goBlog" href="#" target="_blank" rel="noopener">블로그 홈</a>
+      </div>
+    </div>
+  </nav>
+
   <main class="wrap">
     <header class="top">
-      <div class="brand">
-        <div class="kicker">Wedding blog</div>
-        <h1>쭈령이 커플</h1>
-        <p class="sub">
-          웨딩홀 투어부터 스드메, 본식 준비, 신혼여행까지. 최신 글을 자동으로 모아 보여주는 페이지예요.
-        </p>
-      </div>
-
-      <div class="ctaRow">
-        <a class="btn" href="#posts">최신 글 보기</a>
-        <a class="btn primary" id="goBlog" href="#" target="_blank" rel="noopener">블로그 홈으로</a>
-      </div>
+      <h1>웨딩 준비 이야기</h1>
+      <p class="sub">
+        웨딩홀 투어부터 스드메, 본식 준비, 신혼여행까지. 쭐령이 커플의 모든 웨딩 스토리를 한눈에 확인하세요.
+      </p>
     </header>
 
-    <section class="section" id="posts">
-      <div class="sectionHead">
-        <h2>Latest posts</h2>
-        <div class="mini">자동 업데이트 · 썸네일 클릭 → 해당 글로 이동</div>
+    <div class="layout">
+      <div class="mainCol">
+        <section class="section" id="posts">
+          <div class="sectionHead">
+            <div>
+              <h2>최신 글</h2>
+              <div class="mini">실시간 자동 업데이트</div>
+            </div>
+            <div class="tabs" role="tablist" aria-label="피드 필터">
+              <button class="tab is-active" data-tab="new" type="button">Newest</button>
+              <button class="tab" data-tab="featured" type="button">Featured</button>
+              <button class="tab" data-tab="top" type="button">Top</button>
+            </div>
+          </div>
+
+          <div id="state" class="state">불러오는 중…</div>
+          <div class="feed" id="grid"></div>
+        </section>
       </div>
 
-      <div id="state" class="state">불러오는 중…</div>
-      <div class="grid" id="grid"></div>
-    </section>
+      <aside class="sidebar" aria-label="사이드바">
+        <div class="widget">
+          <div class="widgetTitle">쭈령이 커플</div>
+          <p class="widgetText">웨딩홀 투어/스드메/신혼여행 후기와 견적을 모아두는 홈입니다. 궁금한 글은 눌러서 블로그에서 확인해요.</p>
+          <a class="btn ghost block" id="ctaBlog" href="#" target="_blank" rel="noopener">블로그 홈 바로가기</a>
+        </div>
+
+        <div class="widget">
+          <div class="widgetTitle">카테고리</div>
+          <div class="pills" id="pills">
+            <button class="pill is-active" data-cat="all" type="button">전체</button>
+            <button class="pill" data-cat="웨딩홀" type="button">웨딩홀</button>
+            <button class="pill" data-cat="스드메" type="button">스드메</button>
+            <button class="pill" data-cat="신혼여행" type="button">신혼여행</button>
+          </div>
+        </div>
+
+        <div class="widget">
+          <div class="widgetTitle">에디터 픽</div>
+          <div class="sideList" id="sideList"></div>
+        </div>
+      </aside>
+    </div>
 
     <footer>
-      <div>© <span id="y"></span> 쭈령이 커플</div>
-      <div><a id="blogLink" href="#" target="_blank" rel="noopener">블로그 바로가기</a></div>
+      <div>© <span id="y"></span> 쭐령이 커플. All rights reserved.</div>
+      <div><a id="blogLink" href="#" target="_blank" rel="noopener">네이버 블로그 바로가기</a></div>
     </footer>
   </main>
 
@@ -99,15 +285,39 @@
 
   const grid = document.getElementById("grid");
   const state = document.getElementById("state");
+  const q = document.getElementById("q");
+  const pills = document.getElementById("pills");
+  const tabs = document.querySelector(".tabs");
+  const sideList = document.getElementById("sideList");
+
+  let ALL_POSTS = [];
+  let activeTab = "new";      // new | featured | top
+  let activeCat = "all";      // all | 웨딩홀 | 스드메 | 신혼여행
+  let queryText = "";
+
   document.getElementById("y").textContent = new Date().getFullYear();
   document.getElementById("blogLink").href = BLOG_HOME;
   document.getElementById("goBlog").href = BLOG_HOME;
+  document.getElementById("ctaBlog").href = BLOG_HOME;
 
-  function formatDate(pubDate) {
+  function getRelativeTime(pubDate) {
     if (!pubDate) return "";
-    const d = new Date(pubDate);
-    if (Number.isNaN(d.getTime())) return "";
-    return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+    const now = new Date();
+    const past = new Date(pubDate);
+    if (Number.isNaN(past.getTime())) return "";
+
+    const diffMs = now - past;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    const diffWeeks = Math.floor(diffDays / 7);
+
+    if (diffMins < 1) return "방금";
+    if (diffMins < 60) return `${diffMins}m`;
+    if (diffHours < 24) return `${diffHours}h`;
+    if (diffDays < 7) return `${diffDays}d`;
+    if (diffWeeks < 4) return `${diffWeeks}w`;
+    return `${Math.floor(diffWeeks / 4)}mo`;
   }
 
   // RSS description 안에서 첫 이미지 뽑기(없으면 null)
@@ -135,51 +345,174 @@
     return normalizeUrl(src);
   }
 
-
   function stripText(html) {
     if (!html) return "";
     const doc = new DOMParser().parseFromString(html, "text/html");
     return (doc.body.textContent || "").replace(/\s+/g, " ").trim();
   }
 
-  function cardHTML({title, link, desc, date, thumbnail, category}) {
-    const safeThumb = thumbnail || "https://images.unsplash.com/photo-1523438097201-512ae7d59cba?auto=format&fit=crop&w=1600&q=80";
-    const safeCat = category || "Naver Blog";
-    const safeDesc = (desc || "").slice(0, 120) + ((desc||"").length > 120 ? "…" : "");
-    return `
-      <a class="card" href="${link}" target="_blank" rel="noopener" aria-label="${title}">
-        <div class="thumb">
-          <img src="${safeThumb}" alt="${title}">
-          <div class="badge">${safeCat}</div>
-        </div>
-        <div class="content">
-          <h3 class="title">${title}</h3>
-          <p class="desc">${safeDesc}</p>
-          <div class="meta">
-            <div>${date}</div>
-            <div class="arrow">보러가기 <span>→</span></div>
-          </div>
-        </div>
-      </a>
-    `;
-  }
-  
   function decodeEntities(str) {
     if (!str) return "";
     const txt = document.createElement("textarea");
     txt.innerHTML = str;
     return txt.value;
-}
+  }
+
+  function escapeHTML(s){
+    return (s ?? "").replace(/[&<>"']/g, (m) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+  }
+
+  function inferCategory({ category, title, desc }) {
+    if (category) return category;
+    const t = `${title} ${desc}`.toLowerCase();
+    if (t.includes("웨딩홀") || t.includes("홀투어") || t.includes("예식장")) return "웨딩홀";
+    if (t.includes("스드메") || t.includes("드레스") || t.includes("메이크업") || t.includes("스튜디오")) return "스드메";
+    if (t.includes("신혼여행") || t.includes("허니문") || t.includes("바르셀로나") || t.includes("크루즈")) return "신혼여행";
+    return "";
+  }
+
+  function cardHTML({ title, link, desc, date, thumbnail, category }) {
+    const relativeTime = getRelativeTime(date);
+    const badge = category ? `<span class="badge">${escapeHTML(category)}</span>` : "";
+    const time = relativeTime ? `<span class="time">${relativeTime}</span>` : "";
+    const d = desc ? `<p class="desc">${escapeHTML(desc)}</p>` : "";
+    const thumb = thumbnail
+      ? `<a class="thumb" href="${link}" target="_blank" rel="noopener">
+           <img src="${thumbnail}" alt="">
+         </a>`
+      : `<a class="thumb" href="${link}" target="_blank" rel="noopener" aria-label="open"></a>`;
+
+    return `
+      <article class="card">
+        ${thumb}
+        <div class="card-content" style="min-width:0">
+          <div class="metaRow">
+            <span>쭈령이 커플</span>
+            ${badge}
+            ${time}
+          </div>
+          <a href="${link}" target="_blank" rel="noopener">
+            <h3 class="title">${escapeHTML(title)}</h3>
+          </a>
+          ${d}
+        </div>
+      </article>
+    `;
+  }
+
+  function applyTab(posts){
+    if (activeTab === "new") return posts;
+    if (activeTab === "featured") return posts;
+    if (activeTab === "top") return posts;
+    return posts;
+  }
+
+  function render(){
+    let posts = [...ALL_POSTS];
+
+    // 탭
+    posts = applyTab(posts);
+
+    // 카테고리
+    if (activeCat !== "all"){
+      posts = posts.filter(p => (p.category || "").includes(activeCat));
+    }
+
+    // 검색
+    if (queryText.trim()){
+      const qq = queryText.trim().toLowerCase();
+      posts = posts.filter(p =>
+        (p.title || "").toLowerCase().includes(qq) ||
+        (p.desc || "").toLowerCase().includes(qq) ||
+        (p.category || "").toLowerCase().includes(qq)
+      );
+    }
+
+    // 웨딩홀 글 우선 정렬 (최신글 탭에서만)
+    if (activeCat === "all" && !queryText.trim()) {
+      posts.sort((a, b) => {
+        const aIsWedding = (a.category || "").includes("웨딩홀");
+        const bIsWedding = (b.category || "").includes("웨딩홀");
+
+        if (aIsWedding && !bIsWedding) return -1;
+        if (!aIsWedding && bIsWedding) return 1;
+        return 0; // 같은 카테고리끼리는 원래 순서 유지
+      });
+    }
+
+    grid.innerHTML = posts.map(cardHTML).join("");
+  }
+
+  function renderSideList(){
+    const pick = ALL_POSTS.slice(0,5);
+    sideList.innerHTML = pick.map(p => `
+      <a class="sideItem" href="${p.link}" target="_blank" rel="noopener">
+        <div class="sideTitle">${escapeHTML(p.title)}</div>
+        <div class="sideMeta">${p.category ? escapeHTML(p.category) + " · " : ""}${getRelativeTime(p.date)}</div>
+      </a>
+    `).join("");
+  }
+
+  // Search
+  q?.addEventListener("input", (e) => {
+    queryText = e.target.value || "";
+    render();
+  });
+
+  // Tabs
+  tabs?.addEventListener("click", (e) => {
+    const btn = e.target.closest(".tab");
+    if (!btn) return;
+    activeTab = btn.dataset.tab || "new";
+    tabs.querySelectorAll(".tab").forEach(x => x.classList.toggle("is-active", x === btn));
+    render();
+  });
+
+  // Category pills
+  pills?.addEventListener("click", (e) => {
+    const btn = e.target.closest(".pill");
+    if (!btn) return;
+    activeCat = btn.dataset.cat || "all";
+    pills.querySelectorAll(".pill").forEach(x => x.classList.toggle("is-active", x === btn));
+    render();
+  });
+
+  // Navigation links
+  document.querySelector(".nav-links")?.addEventListener("click", (e) => {
+    const link = e.target.closest("a[data-cat]");
+    if (!link) return;
+    e.preventDefault();
+
+    activeCat = link.dataset.cat || "all";
+
+    // Update pill selection
+    pills?.querySelectorAll(".pill").forEach(pill => {
+      pill.classList.toggle("is-active", pill.dataset.cat === activeCat);
+    });
+
+    // Update nav link active state
+    document.querySelectorAll(".nav-links a").forEach(a => {
+      a.style.background = (a === link) ? "var(--hover)" : "";
+      a.style.color = (a === link) ? "var(--ink)" : "";
+    });
+
+    render();
+
+    // Scroll to posts section
+    document.getElementById("posts")?.scrollIntoView({ behavior: "smooth" });
+  });
 
   async function loadFeed() {
     try {
       const res = await fetch(FEED_ENDPOINT, { cache: "no-store" });
       if (!res.ok) throw new Error("feed fetch failed");
       const { xml } = await res.json();
-      
+
       const workerBase = new URL(FEED_ENDPOINT).origin;
       const xmlDoc = new DOMParser().parseFromString(xml, "text/xml");
-      const items = [...xmlDoc.querySelectorAll("item")].slice(0, 9);
+      const items = [...xmlDoc.querySelectorAll("item")]; // 모든 글 가져오기
 
       const posts = items.map(item => {
         const title = item.querySelector("title")?.textContent?.trim() || "Untitled";
@@ -191,21 +524,22 @@
         const thumbProxied = thumb ? `${workerBase}/img?url=${encodeURIComponent(thumb)}` : null;
         const textDesc = stripText(description);
 
-      
         const category = item.querySelector("category")?.textContent?.trim();
-       
+
         return {
           title,
           link,
-          date: formatDate(pubDate),
-          thumbnail: thumbProxied || thumb, // 프록시 우선
-          category,
+          date: pubDate,
+          thumbnail: thumbProxied || thumb,
+          category: inferCategory({ category, title, desc: textDesc }),
           desc: textDesc
         };
       });
 
+      ALL_POSTS = posts;
       state.remove();
-      grid.innerHTML = posts.map(cardHTML).join("");
+      render();
+      renderSideList();
     } catch (e) {
       state.textContent = "최신 글을 불러오지 못했어요. (FEED_ENDPOINT/프록시 배포 상태를 확인해 주세요)";
       console.error(e);
