@@ -1,0 +1,13 @@
+{
+  "name": "seoul-wedding-site",
+  "version": "1.0.0",
+  "description": "쭈령이 커플 웨딩 블로그 랜딩 페이지",
+  "scripts": {
+    "generate": "node scripts/generate-pages.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "xml2js": "^0.6.2"
+  },
+  "type": "module"
+}
