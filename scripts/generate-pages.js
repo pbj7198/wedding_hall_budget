@@ -217,6 +217,20 @@ ${urls.join('\n')}
 </urlset>`;
 }
 
+// Generate robots.txt
+function generateRobotsTxt() {
+  return `User-agent: *
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml`;
+}
+
 // Main function
 async function main() {
   try {
@@ -271,6 +285,11 @@ async function main() {
     console.log('Generating sitemap...');
     const sitemapContent = generateSitemap(posts);
     fs.writeFileSync(path.join(process.cwd(), 'sitemap.xml'), sitemapContent, 'utf8');
+
+    // Generate robots.txt
+    console.log('Generating robots.txt...');
+    const robotsTxtContent = generateRobotsTxt();
+    fs.writeFileSync(path.join(process.cwd(), 'robots.txt'), robotsTxtContent, 'utf8');
 
     console.log('✅ All pages generated successfully!');
     console.log(`Total posts: ${posts.length}`);
